@@ -1,0 +1,17 @@
+landlords\app\controller\error\GlobalControllerErrorHandler$ExceptionMessage.class
+landlords\app\entity\Region.class
+landlords\app\dao\RegionDao.class
+landlords\app\controller\model\LandlordData.class
+landlords\app\entity\Landlord.class
+landlords\app\entity\Unit.class
+landlords\app\dao\LandlordDao.class
+landlords\app\service\LandlordService.class
+landlords\app\controller\model\ContributorData$LandlordResponse.class
+landlords\app\controller\model\LandlordData$LandlordContributor.class
+landlords\app\LandlordsApplication.class
+landlords\app\controller\error\GlobalControllerErrorHandler.class
+landlords\app\dao\ContributorDao.class
+landlords\app\controller\LandlordController.class
+landlords\app\controller\model\ContributorData.class
+landlords\app\controller\error\GlobalControllerErrorHandler$LogStatus.class
+landlords\app\entity\Contributor.class

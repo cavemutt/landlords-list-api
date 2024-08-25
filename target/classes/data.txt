@@ -1,0 +1,6 @@
+INSERT INTO region (region_name) VALUES ('Downtown Worcester');
+INSERT INTO region (region_name) VALUES ('City of Worcester');
+INSERT INTO region (region_name) VALUES ('Worcester County - North');
+INSERT INTO region (region_name) VALUES ('Worcester County - South');
+INSERT INTO region (region_name) VALUES ('Worcester County - East');
+INSERT INTO region (region_name) VALUES ('Worcester County - West');
