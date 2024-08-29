@@ -1,63 +1,69 @@
 package landlords.app.controller.model;
 
 import java.util.HashSet;
-
-
 import java.util.Set;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import landlords.app.entity.Contributor;
 import landlords.app.entity.Landlord;
 import landlords.app.entity.Region;
 import landlords.app.entity.Unit;
-
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ContributorData {
-
-	private Long contributorId;
-	private String contributorName;
-	private String contributorEmail;
-	private Set<LandlordResponse> landlords = new HashSet<>();
+public class RegionData {
+	private Long regionId;	
+	private String regionName;
+	Set<RegionLandlord> landlords = new HashSet<>();
 	
-	public ContributorData(Contributor contributor) {
-		contributorId = contributor.getContributorId();
-		contributorName = contributor.getContributorName();
-		contributorEmail = contributor.getContributorEmail();
-		
-		for (Landlord landlord : contributor.getLandlords()) {
-			landlords.add(new LandlordResponse(landlord));
+	public RegionData (Region region) {
+		regionId = region.getRegionId();
+		regionName = region.getRegion();
+		for (Landlord landlord : region.getLandlords()) {
+			landlords.add(new RegionLandlord(landlord));
 		}
+		
 	}
-
 	
-//	@Value
 	@Data
 	@NoArgsConstructor
-	static class LandlordResponse {
+	static class RegionLandlord {
 		private Long landlordId;
 		private String landlordName;
 		private String landlordPhone;
 		private String landlordEmail;
 		private String landlordNotes;
-		private Set<String> regions = new HashSet<>();
+		private RegionLandlordContributor contributor;
 		private Set<LandlordUnit> units = new HashSet<>();
 		
-		LandlordResponse(Landlord landlord) {
+		public RegionLandlord(Landlord landlord) {
 			landlordId = landlord.getLandlordId();
 			landlordName = landlord.getLandlordName();
 			landlordPhone = landlord.getLandlordPhone();
 			landlordEmail = landlord.getLandlordEmail();
 			landlordNotes = landlord.getLandlordNotes();
-			for (Region region : landlord.getRegions()) {
-				regions.add(region.getRegion());
-			}
+			contributor = new RegionLandlordContributor(landlord.getContributor());
 			for (Unit unit : landlord.getUnits()) {
 				units.add(new LandlordUnit(unit));
 			}
 			
 		}
+		
+		@Data
+		@NoArgsConstructor
+		public static class RegionLandlordContributor {
+			private Long contributorId;
+			private String contributorName;
+			private String contributorEmail;
+			
+			public RegionLandlordContributor(Contributor contributor) {
+				contributorId = contributor.getContributorId();
+				contributorName = contributor.getContributorName();
+				contributorEmail = contributor.getContributorEmail();
+			}
+		}
+		
 		@Data
 		@NoArgsConstructor
 		public static class LandlordUnit {

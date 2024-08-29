@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import landlords.app.controller.model.ContributorData;
 import landlords.app.controller.model.LandlordData;
+import landlords.app.controller.model.RegionData;
 import landlords.app.controller.model.UnitData;
 import landlords.app.dao.ContributorDao;
 import landlords.app.dao.LandlordDao;
@@ -114,6 +115,7 @@ public class LandlordService {
 
 	private void setLandlordFields(Landlord landlord, LandlordData landlordData) {
 		landlord.setLandlordName(landlordData.getLandlordName());
+		landlord.setRealtyAffiliation(landlordData.getRealtyAffiliation());
 		landlord.setLandlordPhone(landlordData.getLandlordPhone());
 		landlord.setLandlordEmail(landlordData.getLandlordEmail());
 		landlord.setLandlordNotes(landlordData.getLandlordNotes());
@@ -197,5 +199,26 @@ public class LandlordService {
 
 	private Unit findUnitById(Long unitId) {
 		return unitDao.findById(unitId).orElseThrow();
+	}
+
+	@Transactional(readOnly = true)
+	public List<RegionData> retrieveAllRegions() {
+//		@formatter:off
+		return regionDao
+		.findAll()
+		.stream()
+		.map(RegionData::new)
+		.toList();
+//		@formatter:on
+	}
+	
+	@Transactional(readOnly = true)
+	public RegionData retrieveRegionById(Long regionId) {
+		Region region = findRegionById(regionId);
+		return new RegionData(region);
+	}
+
+	private Region findRegionById(Long regionId) {
+		return regionDao.findById(regionId).orElseThrow();
 	}
 }

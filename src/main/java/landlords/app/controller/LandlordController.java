@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import landlords.app.controller.model.ContributorData;
 import landlords.app.controller.model.LandlordData;
+import landlords.app.controller.model.RegionData;
 import landlords.app.controller.model.UnitData;
 import landlords.app.service.LandlordService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class LandlordController {
 	@Autowired
 	private LandlordService landlordService;
 	
+//	Create contributor
 	@PostMapping("/contributor")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ContributorData insertContributor(@RequestBody ContributorData contributorData) {
@@ -36,6 +38,7 @@ public class LandlordController {
 		return landlordService.saveContributor(contributorData);
 	}
 	
+//	Update contributor
 	@PutMapping("/contributor/{contributorId}")
 	public ContributorData updateContributor(@PathVariable Long contributorId, @RequestBody ContributorData contributorData) {
 		contributorData.setContributorId(contributorId);
@@ -43,6 +46,7 @@ public class LandlordController {
 		return landlordService.saveContributor(contributorData);
 	}
 	
+//	Read contributor
 	@GetMapping("/contributor")
 	public List<ContributorData> retrieveallContributors() {
 		log.info("Retrieve all contributors called");
@@ -55,6 +59,7 @@ public class LandlordController {
 		return landlordService.retrieveContributorById(contributorId);
 	}
 	
+//	Delete contributor
 	@DeleteMapping("/contributor")
 	public void deleteAllContributors() {
 		log.info("Attempting to delete all contributors");
@@ -67,12 +72,27 @@ public class LandlordController {
 		return Map.of("message", "Deletion of contributor with ID=" + contributorId + " was successful.");
 	}
 	
+
+	@GetMapping("/region")
+	public List<RegionData> retrieveallRegions() {
+		log.info("Retrieve all region data");
+		return landlordService.retrieveAllRegions();
+	}
+
+	@GetMapping("/region/{regionId}")
+	public RegionData retrieveRegionById(@PathVariable Long regionId) {
+		log.info("Retrieving info for region with ID={}", regionId);
+		return landlordService.retrieveRegionById(regionId);
+	}
+	
+//	Create landlord
 	@PostMapping("/contributor/{contributorId}/landlord")
 	public LandlordData insertLandlord(@PathVariable Long contributorId, @RequestBody LandlordData landlordData) {
 		log.info("Creating landlord {} for contributor with ID={}, landlordData, contributorId");
 		return landlordService.saveLandlord(contributorId, landlordData);
 	}
 	
+//	Update landlord
 	@PutMapping("/contributor/{contributorId}/landlord/{landlordId}")
 	public LandlordData updateLandlord(@PathVariable Long contributorId, @PathVariable Long landlordId, @RequestBody LandlordData landlordData) {
 		landlordData.setLandlordId(landlordId);
@@ -80,6 +100,7 @@ public class LandlordController {
 		return landlordService.saveLandlord(contributorId, landlordData);
 	}
 	
+//	Read landlord
 	@GetMapping("/contributor/{contributorId}/landlord/{landlordId}")
 	public LandlordData retrieveLandlordById(@PathVariable Long contributorId, @PathVariable Long landlordId) {
 		log.info("Retrieving landlord with ID={} inserted by contributor with ID={}", landlordId, contributorId);
@@ -92,11 +113,13 @@ public class LandlordController {
 		return landlordService.retrieveAllLandlords(contributorId);
 	}
 	
+//	Delete landlord
 	@DeleteMapping("/contributor/{contributorId}/landlord")
 	public void deleteAllLandlords() {
 		log.info("Attempting to delete all landlords");
 		throw new UnsupportedOperationException("Deleting all landlords is not allowed.");
 	}
+	
 	@DeleteMapping("/contributor/{contributorId}/landlord/{landlordId}")
 	public Map<String, String> deleteLandlordById(@PathVariable Long contributorId, @PathVariable Long landlordId) {
 		log.info("Deleting landlord with ID={} from contributor with ID={}", landlordId, contributorId);
@@ -104,6 +127,7 @@ public class LandlordController {
 		return Map.of("message", "Deletion of landlord with ID=" + landlordId + "from contributor with ID=" + contributorId + " was successful.");
 	}
 	
+//	Create Unit
 	@PostMapping("/contributor/{contributorId}/landlord/{landlordId}/unit")
 	public UnitData insertUnit(@PathVariable Long contributorId, @PathVariable Long landlordId, @RequestBody UnitData unitData) {
 		log.info("Creating unit {} belonging to landlord with ID={} for contributor with ID={}", unitData, landlordId, contributorId);
