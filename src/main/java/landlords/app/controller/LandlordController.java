@@ -72,7 +72,7 @@ public class LandlordController {
 		return Map.of("message", "Deletion of contributor with ID=" + contributorId + " was successful.");
 	}
 	
-
+//  Read region
 	@GetMapping("/region")
 	public List<RegionData> retrieveallRegions() {
 		log.info("Retrieve all region data");
