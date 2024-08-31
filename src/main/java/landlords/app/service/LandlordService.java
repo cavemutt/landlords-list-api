@@ -38,6 +38,7 @@ public class LandlordService {
 	@Autowired
 	private UnitDao unitDao;
 
+//	Contributor methods
 	@Transactional(readOnly = false)
 	public ContributorData saveContributor(ContributorData contributorData) {
 		Long contributorId = contributorData.getContributorId();
@@ -97,6 +98,7 @@ public class LandlordService {
 		
 	}
 
+//	Landlord methods
 	@Transactional(readOnly = false)
 	public LandlordData saveLandlord(Long contributorId, LandlordData landlordData) {
 		Contributor contributor = findContributorById(contributorId);
@@ -167,6 +169,7 @@ public class LandlordService {
 		landlordDao.delete(landlord);
 	}
 
+//	Unit methods
 	@Transactional(readOnly = false)
 	public UnitData saveUnit(Long landlordId, UnitData unitData) {
 		Landlord landlord = findLandlordById(landlordId);
@@ -201,6 +204,7 @@ public class LandlordService {
 		return unitDao.findById(unitId).orElseThrow();
 	}
 
+//	Region methods
 	@Transactional(readOnly = true)
 	public List<RegionData> retrieveAllRegions() {
 //		@formatter:off

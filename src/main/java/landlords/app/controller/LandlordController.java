@@ -46,25 +46,27 @@ public class LandlordController {
 		return landlordService.saveContributor(contributorData);
 	}
 	
-//	Read contributor
+//	Read all contributors
 	@GetMapping("/contributor")
 	public List<ContributorData> retrieveallContributors() {
 		log.info("Retrieve all contributors called");
 		return landlordService.retrieveAllContributors();
 	}
-
+//  Read one contributor
 	@GetMapping("/contributor/{contributorId}")
 	public ContributorData retrieveContributorById(@PathVariable Long contributorId) {
 		log.info("Retrieving contributor with ID={}", contributorId);
 		return landlordService.retrieveContributorById(contributorId);
 	}
 	
-//	Delete contributor
+//	attempt to Delete all contributors 
 	@DeleteMapping("/contributor")
 	public void deleteAllContributors() {
 		log.info("Attempting to delete all contributors");
 		throw new UnsupportedOperationException("Deleting all contributors is not allowed.");
 	}
+	
+//	Delete contributor by ID
 	@DeleteMapping("/contributor/{contributorId}")
 	public Map<String, String> deleteContributorById(@PathVariable Long contributorId) {
 		log.info("Deleting contributor with ID={}", contributorId);
@@ -72,13 +74,14 @@ public class LandlordController {
 		return Map.of("message", "Deletion of contributor with ID=" + contributorId + " was successful.");
 	}
 	
-//  Read region
+//  Read all regions
 	@GetMapping("/region")
 	public List<RegionData> retrieveallRegions() {
 		log.info("Retrieve all region data");
 		return landlordService.retrieveAllRegions();
 	}
 
+//	Read region by ID
 	@GetMapping("/region/{regionId}")
 	public RegionData retrieveRegionById(@PathVariable Long regionId) {
 		log.info("Retrieving info for region with ID={}", regionId);
@@ -100,26 +103,28 @@ public class LandlordController {
 		return landlordService.saveLandlord(contributorId, landlordData);
 	}
 	
-//	Read landlord
+//	Read all landlords
 	@GetMapping("/contributor/{contributorId}/landlord/{landlordId}")
 	public LandlordData retrieveLandlordById(@PathVariable Long contributorId, @PathVariable Long landlordId) {
 		log.info("Retrieving landlord with ID={} inserted by contributor with ID={}", landlordId, contributorId);
 		return landlordService.retrieveLandlordById(contributorId, landlordId);
 	}
 	
+//	Read landlord by ID
 	@GetMapping("/contributor/{contributorId}/landlord")
 	public List<LandlordData> retrieveallLandlords(Long contributorId) {
 		log.info("Retrieve all landlords for contributor with ID={}", contributorId);
 		return landlordService.retrieveAllLandlords(contributorId);
 	}
 	
-//	Delete landlord
+//	attempt to Delete all landlords
 	@DeleteMapping("/contributor/{contributorId}/landlord")
 	public void deleteAllLandlords() {
 		log.info("Attempting to delete all landlords");
 		throw new UnsupportedOperationException("Deleting all landlords is not allowed.");
 	}
 	
+//	Delete landlord by ID
 	@DeleteMapping("/contributor/{contributorId}/landlord/{landlordId}")
 	public Map<String, String> deleteLandlordById(@PathVariable Long contributorId, @PathVariable Long landlordId) {
 		log.info("Deleting landlord with ID={} from contributor with ID={}", landlordId, contributorId);
