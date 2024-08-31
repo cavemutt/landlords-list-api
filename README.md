@@ -1,6 +1,6 @@
 This is the final project for the Promineo Tech Backend Developer Course.
 
-#Landlords List API
+# Landlords List API
 
 This project uses Java, Maven, Spring Boot, Spring JPA, Lombok, MySql Workbench, DBeaver, Eclipse IDE and ARC to show how it works and the exception codes thrown.
 
